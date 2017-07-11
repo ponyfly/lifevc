@@ -1,7 +1,6 @@
 <template>
   <div>
     <header id="topbar" class="header">
-      <div class="header-content"></div>
       <div class="header-content">
         <p class="header-title">账户中心</p>
         <router-link to="/setting">
@@ -10,88 +9,96 @@
       </div>
     </header>
     <article class="uscenter-cont life-module">
-      <div class="page-loadmore-wrapper">
-        <div class="mint-loadmore">
-          <div class="mint-loadmore-content" style="transform: translate3d(0px, 0px, 0px);">
-            <div class="mint-loadmore-top"><!----> <span class="mint-loadmore-text">下拉刷新</span></div>
-            <div class="acct-user-wrap"><!---->
-              <div class="acct-nolog"><span class="state">您还未登录</span>
-                <div class="btn-entry"><router-link to="/login" class="font-large">登录</router-link>
-                  <span class="split"></span> <router-link to="/register"
-                                                                    class="font-large">注册</router-link></div>
-              </div>
+      <mt-loadmore :top-method="loadTop"
+                   :bottom-method="loadBottom"
+                   :bottom-all-loaded="allLoaded"
+                   ref="loadmore">
+        <div class="acct-user-wrap"><!---->
+          <div class="acct-nolog"><span class="state">您还未登录</span>
+            <div class="btn-entry"><router-link to="/login" class="font-large">登录</router-link>
+              <span class="split"></span>
+              <router-link to="/register" class="font-large">注册</router-link>
             </div>
-            <div class="dashboard-order life-dashboard-order">
-              <ul>
-                <li><a href="#/usercenter/userorder/waittoypay"><span
-                    class="item-ico"><!----> <span id="ico1"></span></span> <span
-                    class="item-title">待支付</span></a></li>
-                <li><a href="#/usercenter/userorder/packing"><span
-                    class="item-ico"><!----> <span id="ico2"></span></span> <span
-                    class="item-title">待发货</span></a></li>
-                <li><a href="#/usercenter/userorder/shipped"><span
-                    class="item-ico"><!----> <span id="ico3"></span></span> <span
-                    class="item-title">待收货</span></a></li>
-              </ul>
-              <ul>
-                <li><a href="#/usercenter/userorder/waittocomment"><span
-                    class="item-ico"><!----> <span id="ico4"></span></span> <span
-                    class="item-title">待评论</span></a></li>
-                <li><a href="#/usercenter/userorder/reply"><span
-                    class="item-ico"><!----> <span id="ico5"></span></span> <span
-                    class="item-title">回复</span></a></li>
-                <li><a href="#/usercenter/returnorder"><span
-                                                                                                   class="item-ico"><span
-                    id="ico6"></span></span> <span
-                                                                      class="item-title">退换货</span></a></li>
-              </ul>
-            </div>
-            <div class="dashboard">
-              <ul style="margin-bottom: 1rem;">
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_list_cm.png" class="item-i"> <span
-                    class="item-title">我的订单</span> <span class="arr-r"></span> <!----></a></li>
-              </ul>
-              <ul style="margin-bottom: 1rem;">
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_coupon_cm.png" class="item-i"> <span
-                    class="item-title">我的优惠券</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_pig_cm.png" class="item-i"> <span
-                    class="item-title">现金积分</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_invoice.png" class="item-i"> <span
-                    class="item-title">关于发票</span> <span class="arr-r"></span> <!----></a></li>
-              </ul>
-              <ul style="margin-bottom: 1rem;">
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_gear_cm.png" class="item-i"> <span
-                    class="item-title">密码和登录信息</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_dialoguebubble3_cm.png" class="item-i">
-                  <span class="item-title">老会员建议</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_customerservice_cm.png" class="item-i">
-                  <span class="item-title">客户服务</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_currentnode_cm.png" class="item-i">
-                  <span class="item-title">地址管理</span> <span class="arr-r"></span> <!----></a></li>
-                <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/sms_cm.png" class="item-i"> <span
-                    class="item-title">手机验证</span> <span class="arr-r"></span> <!----></a></li>
-              </ul>
-            </div>
-            <div class="acct-logout" style="display: none;"><input type="button"
-                                                                                      value="退出当前账号"
-                                                                                      class="btn btn-logout"></div>
-            <!----></div>
+          </div>
         </div>
-      </div>
+        <div class="dashboard-order life-dashboard-order">
+          <ul>
+            <li><a href="#/usercenter/userorder/waittoypay"><span
+                class="item-ico"><!----> <span id="ico1"></span></span> <span
+                class="item-title">待支付</span></a></li>
+            <li><a href="#/usercenter/userorder/packing"><span
+                class="item-ico"><!----> <span id="ico2"></span></span> <span
+                class="item-title">待发货</span></a></li>
+            <li><a href="#/usercenter/userorder/shipped"><span
+                class="item-ico"><!----> <span id="ico3"></span></span> <span
+                class="item-title">待收货</span></a></li>
+          </ul>
+          <ul>
+            <li><a href="#/usercenter/userorder/waittocomment"><span
+                class="item-ico"><!----> <span id="ico4"></span></span> <span
+                class="item-title">待评论</span></a></li>
+            <li><a href="#/usercenter/userorder/reply"><span
+                class="item-ico"><!----> <span id="ico5"></span></span> <span
+                class="item-title">回复</span></a></li>
+            <li><a href="#/usercenter/returnorder"><span
+                class="item-ico"><span
+                id="ico6"></span></span> <span
+                class="item-title">退换货</span></a></li>
+          </ul>
+        </div>
+        <div class="dashboard">
+          <ul style="margin-bottom: 1rem;">
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_list_cm.png" class="item-i"> <span
+                class="item-title">我的订单</span> <span class="arr-r"></span> <!----></a></li>
+          </ul>
+          <ul style="margin-bottom: 1rem;">
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_coupon_cm.png" class="item-i"> <span
+                class="item-title">我的优惠券</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_pig_cm.png" class="item-i"> <span
+                class="item-title">现金积分</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_invoice.png" class="item-i"> <span
+                class="item-title">关于发票</span> <span class="arr-r"></span> <!----></a></li>
+          </ul>
+          <ul style="margin-bottom: 1rem;">
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_gear_cm.png" class="item-i"> <span
+                class="item-title">密码和登录信息</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_dialoguebubble3_cm.png" class="item-i">
+              <span class="item-title">老会员建议</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/i_customerservice_cm.png" class="item-i">
+              <span class="item-title">客户服务</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/ic_currentnode_cm.png" class="item-i">
+              <span class="item-title">地址管理</span> <span class="arr-r"></span> <!----></a></li>
+            <li><a><img src="http://i.lifevccdn.com/upload/centermenuimg/sms_cm.png" class="item-i"> <span
+                class="item-title">手机验证</span> <span class="arr-r"></span> <!----></a></li>
+          </ul>
+        </div>
+        <div class="acct-logout" style="display: none;"><input type="button"
+                                                               value="退出当前账号"
+                                                               class="btn btn-logout"></div>
+      </mt-loadmore>
     </article>
   </div>
 </template>
 
 <script>
-
+  import {Loadmore} from 'mint-ui'
   export default {
     data(){
-      return {}
+      return {
+        allLoaded:false
+      }
     },
-    computed: {},
-    methods: {},
+    methods: {
+      loadTop() {
+        this.$refs.loadmore.onTopLoaded();
+      },
+      loadBottom() {
+        this.allLoaded = true;// 若数据已全部获取完毕
+        this.$refs.loadmore.onBottomLoaded();
+      }
+    },
     components:{
-
+      'mt-loadmore':Loadmore
     }
   }
 </script>
@@ -135,21 +142,6 @@
     margin-top: 4rem;
     padding-bottom: 4.5rem;
     color: #2e2e2e;
-  }
-  .mint-loadmore {
-    overflow: hidden;
-  }
-  .mint-loadmore-content.is-dropped {
-    -webkit-transition: .2s;
-    transition: .2s;
-  }
-  .mint-loadmore-top {
-    margin-top: -50px;
-  }
-  .mint-loadmore-bottom, .mint-loadmore-top {
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
   }
   .acct-user-wrap {
     width: 100%;

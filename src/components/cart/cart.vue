@@ -1,5 +1,11 @@
 <template>
   <div class="cart-wrap">
+    <!--<mt-loadmore :top-method="loadTop"
+                 :bottom-method="loadBottom"
+                 :bottom-all-loaded="allLoaded"
+                 :maxDistance="180"
+                 ref="loadmore">
+    </mt-loadmore>-->
     <h1>我是购物车</h1>
     <mt-swipe :auto="2000" >
       <mt-swipe-item><a><img
@@ -43,16 +49,25 @@
 </template>
 
 <script>
-  import {Swipe, SwipeItem } from 'mint-ui'
+  import {Swipe, SwipeItem, Loadmore} from 'mint-ui'
   export default {
     data(){
       return {}
     },
     computed: {},
-    methods: {},
+    methods: {
+      loadTop() {
+        this.$refs.loadmore.onTopLoaded();
+      },
+      loadBottom() {
+        this.allLoaded = true;// 若数据已全部获取完毕
+        this.$refs.loadmore.onBottomLoaded();
+      }
+    },
     components:{
       'mt-swipe':Swipe,
-      'mt-swipe-item':SwipeItem
+      'mt-swipe-item':SwipeItem,
+      'mt-loadmore':Loadmore
     }
   }
 </script>

@@ -5,8 +5,8 @@
       <div class="header-Ico"></div>
       <router-link to="/all"><span class="head-typeimg"></span></router-link></div>
     <div title="分类导航条" class="wrap-menuNavNewProduct">
-      <div id="navPanelDiv" class="menuNavNewProductPanel">
-        <ul id="navUL" class="menuNavNewProduct" style="width: 800px;">
+      <div id="navPanelDiv" class="menuNavNewProductPanel" ref="menuNavNewProductPanel">
+        <ul id="navUL" class="menuNavNewProduct" style="width: 800px;" ref="menuNavNewProduct">
           <li class="font-large"><router-link to="/home" default-active="1">首页</router-link></li> <!---->
           <li class="font-large"><router-link to="/new">新品</router-link></li> <!---->
           <li class="font-large"><router-link to="/channel/2866">家务</router-link></li> <!---->
@@ -24,9 +24,20 @@
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
   export default {
     data(){
       return {}
+    },
+    created(){
+      this.$nextTick(()=>{
+        new BScroll(this.$refs.menuNavNewProductPanel,{
+          click:true,
+          scrollX:true,
+          momentum:true,
+          bounce: true
+        })
+      })
     },
     computed: {},
     methods: {}
@@ -85,6 +96,7 @@
         position: relative;
         width: 100%;
         height: 4rem;
+        border-bottom 2px solid #ddd
         .menuNavNewProduct {
           position: relative;
           z-index: 1101;
@@ -98,6 +110,7 @@
             width: 80px;
             text-align: center;
             border-bottom: 2px solid #ddd;
+            margin-top 2px
             a{
               height: 3.8rem;
               display: block;
@@ -121,5 +134,6 @@
       }
     }
   }
+
 
 </style>

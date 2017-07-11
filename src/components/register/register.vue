@@ -1,48 +1,34 @@
 <template>
-  <div id="loginBg" class="acct-wrap" style="margin-top: 0px; overflow: hidden; height: 667px;">
+  <div id="registerBg" class="acct-wrap" style="margin-top: 0px; overflow: hidden; height: 667px;">
     <div class="old_user_login"><label class="acct_top_back" @click="backToUserCenter"></label>
       <img src="./images/ico1.png" class="acct_top_show">
     </div>
     <div class="bg-wrap" style="height: 526px;">
       <div class="login_content">
-        <h1>老用户登录</h1>
+        <h1>新用户注册</h1>
         <div id="wrap">
-          <div v-if="isShow">
-            <form id="reset-form">
-              <ul class="fm_list">
-                <li class="multi"><input required="required" type="tel" maxlength="11" placeholder="请输入手机号" class="field_ipt">
+          <div>
+            <form id="register-form">
+              <ul class="fm_list register_distance">
+                <li><input id="txtMobile" type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt"></li>
+                <li><input type="text" maxlength="20" placeholder="请设置6-20位密码,包含字母、数字或符号" id="regPwd" required="required" class="field_ipt"></li>
+                <li><input required="required" type="text" maxlength="10" id="regCaptcha" placeholder="请输入图形验证码" class="field_ipt" style="width: 70%;">
+                  <div class="verifycode_img">
+                    <img src="http://account.lifevc.com/Account/NewVerifyCode?t=1499764256730"
+                      style="width: 20%; border-left: 0px solid silver;">
+                    <img src="./images/ico2.png" style="width: 5%;">
+                  </div>
+                </li>
+                <li>
+                  <input type="text" placeholder="请输入手机验证码" maxlength="10" id="regSmsCaptcha" required="required" class="field_ipt">
                   <a class="fidld_skip">获取验证码</a>
                 </li>
-                <li>
-                  <input required="required" type="text" maxlength="10" id="loginVerifyCode" placeholder="请输入手机验证码" class="field_ipt">
-                </li>
               </ul>
-              <div class="set_link">
-                <p class="problem_contact_service">遇到问题？请
-                  <a href="tel:400-609-2288">联系客服</a>
-                </p>
-                <a><b></b> <span @click="changeLoginWay">账号密码登录</span></a>
-              </div>
+              <p>遇到问题？请
+                <a href="tel:400-609-2288">联系客服</a></p> <input type="button" value="注册"  class="btn_login space m-top">
+              <input type="button" value="登录" class="btn_regisiter space m-top" @click="goLogin">
             </form>
           </div>
-          <div v-else>
-            <form id="login-form">
-              <ul class="fm_list">
-                <li>
-                  <input type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt">
-                </li>
-                <li class="multi">
-                  <input type="password" maxlength="20" placeholder="请输入登录密码" required="required" class="field_ipt">
-                  <a class="fidld_skip">忘记密码</a>
-                </li>
-              </ul>
-              <div id="setting" class="set_link">
-                <a href="javascript:;"><span @click="changeLoginWay">手机号快捷登录</span><b></b></a>
-              </div>
-            </form>
-          </div>
-          <input type="button" value="登录" class="btn_login">
-          <input type="button" value="注册" class="btn_regisiter" @click="goRegister">
         </div>
       </div>
     </div>
@@ -68,8 +54,8 @@
       changeLoginWay(){
         this.isShow = !this.isShow
       },
-      goRegister(){
-        this.$router.push({path:'/register'})
+      goLogin(){
+        this.$router.push({path:'/login'})
       }
     },
   }
@@ -124,6 +110,9 @@
     height: 6.5rem;
     box-sizing: border-box;
   }
+  #registerBg h1{
+    height: 1.04rem;
+  }
   #loginBg h1, #registerBg h1 {
     width: 100%;
     text-align: center;
@@ -151,6 +140,12 @@
     top: 0;
     height: 1rem;
     box-sizing: border-box;
+  }
+  .verifycode_img {
+    position: absolute;
+    right: -70%;
+    width: 100%;
+    top: -7px;
   }
   form input, form select {
     height: 100%;
@@ -217,6 +212,10 @@
     line-height: .4rem;
     margin-right: .14rem;
   }
+  .register_distance {
+    box-sizing: border-box;
+    margin-bottom: .2rem;
+  }
   .btn_login, .btn_regisiter {
     width: 80%;
     overflow: hidden;
@@ -229,6 +228,17 @@
     letter-spacing: 20px;
     text-indent: 20px;
     box-sizing: border-box;
+  }
+  #register-form p {
+    font-size: 14px;
+    color: #666;
+    width: 100%;
+    text-align: center;
+    margin-bottom: .15rem;
+  }
+  #register-form p a {
+    color: #3ea438;
+    text-decoration: underline;
   }
   .btn_login {
     margin: 0 auto .3rem;

@@ -8,6 +8,7 @@ import usercenter from '../components/usercenter/usercenter.vue'
 import newproduct from '../components/newproduct/newproduct.vue'
 import channel from '../components/channel/channel.vue'
 import login from '../components/login/login.vue'
+import register from '../components/register/register.vue'
 
 Vue.use(VueRouter)
 
@@ -23,5 +24,6 @@ export default new VueRouter({
     {path: '/new', component: newproduct},
     {path: '/channel/:id', component: channel},
     {path: '/login', component: login},
+    {path: '/register', component: register},
   ]
 })

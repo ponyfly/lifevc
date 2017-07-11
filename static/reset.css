@@ -100,3 +100,6 @@ img {
 em, i {
   font-style: normal;
 }
+input{
+  outline: none;
+}
