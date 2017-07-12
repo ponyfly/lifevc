@@ -1,33 +1,44 @@
 <template>
-  <header id="topbar" class="header">
-    <div class="header-content"></div>
-    <div class="wrap-heard">
-      <div class="header-Ico"></div>
-      <router-link to="/all"><span class="head-typeimg"></span></router-link></div>
-    <div title="分类导航条" class="wrap-menuNavNewProduct">
-      <div id="navPanelDiv" class="menuNavNewProductPanel" ref="menuNavNewProductPanel">
-        <ul id="navUL" class="menuNavNewProduct" style="width: 800px;" ref="menuNavNewProduct">
-          <li class="font-large"><router-link to="/home" default-active="1">首页</router-link></li> <!---->
-          <li class="font-large"><router-link to="/new">新品</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2866">家务</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2864">下厨</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2865">家居服</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2861">生活</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2860">软装</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2862">床品</router-link></li> <!---->
-          <li class="font-large"><router-link to="/channel/2863">工作和旅行</router-link></li> <!----><!---->
-          <li class="font-large"><router-link to="/channel/2859">了解LifeVC</router-link></li>
-        </ul>
+  <div>
+    <header id="topbar" class="header" v-show="knowMoreShow">
+      <div class="header-content"></div>
+      <div class="wrap-heard">
+        <div class="header-Ico"></div>
+        <router-link to="/all"><span class="head-typeimg"></span></router-link></div>
+      <div title="分类导航条" class="wrap-menuNavNewProduct">
+        <div id="navPanelDiv" class="menuNavNewProductPanel" ref="menuNavNewProductPanel">
+          <ul id="navUL" class="menuNavNewProduct" style="width: 800px;" ref="menuNavNewProduct">
+            <li class="font-large"><router-link to="/home" default-active="1">首页</router-link></li> <!---->
+            <li class="font-large"><router-link to="/new">新品</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2866">家务</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2864">下厨</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2865">家居服</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2861">生活</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2860">软装</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2862">床品</router-link></li> <!---->
+            <li class="font-large"><router-link to="/channel/2863">工作和旅行</router-link></li> <!----><!---->
+            <li class="font-large">
+              <a href="javascript:void(0)"
+                 @click.stop.prevent="knowShow(false)">了解LifeVC
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+    <knowmore v-show="!knowMoreShow" @knowShow="knowShow"></knowmore>
+  </div>
+
 </template>
 
 <script>
+  import knowmore from '../knowmore/knowmore.vue'
   import BScroll from 'better-scroll'
   export default {
     data(){
-      return {}
+      return {
+        knowMoreShow:true
+      }
     },
     created(){
       this.$nextTick(()=>{
@@ -40,7 +51,14 @@
       })
     },
     computed: {},
-    methods: {}
+    methods: {
+      knowShow(isShow){
+        this.knowMoreShow = isShow
+      }
+    },
+    components:{
+      knowmore
+    }
   }
 </script>
 

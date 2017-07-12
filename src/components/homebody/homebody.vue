@@ -1,5 +1,5 @@
 <template>
-  <article  infinite-scroll-disabled="loading" infinite-scroll-distance="100" class="home-body">
+  <article class="home-body">
     <div class="page-loadmore-wrapper">
       <mt-loadmore :top-method="loadTop"
                    :bottom-method="loadBottom"
@@ -176,7 +176,7 @@
             <div  class="combo-title"></div>
             <div  class="img-wrap" style="height: 689px;"><img
                 usemap="#planetmap7"
-                src="./images/itemdefault.png"
+                src="http://i.lifevccdn.com/upload/combinationchart/5e1e40565e5147a8849f73b630ba0a60_d1242x0.jpg"
                 lazy="loading"
                 style="width: 100%; height: 689px;">
               <map  name="planetmap7" id="planetmap7">
@@ -190,55 +190,17 @@
               </map>
             </div>
           </div>
-        </div>
-        <div class="item-combo">
-          <div   title="组合图活动">
-            <div  class="combo-title"></div>
-            <div  class="img-wrap" style="height: 484px;"><img
-                usemap="#planetmap8"
-                src="./images/itemdefault.png"
-                lazy="loading"
-                style="width: 100%; height: 484px;">
-              <map  name="planetmap8" id="planetmap8">
-                <area  shape="rect" coords="0,0,375,150">
-                <area  shape="rect" coords="11,164,127,314">
-                <area  shape="rect" coords="131,159,243,309">
-                <area  shape="rect" coords="247,164,360,309">
-                <area  shape="rect" coords="11,314,123,474">
-                <area  shape="rect" coords="127,314,243,469">
-                <area  shape="rect" coords="247,314,360,469">
-              </map>
-            </div>
-          </div>
-        </div>
-        <div class="item-combo">
-          <div   title="组合图活动">
-            <div  class="combo-title"></div>
-            <div  class="img-wrap" style="height: 689px;"><img
-                usemap="#planetmap9"
-                src="./images/itemdefault.png"
-                lazy="loading"
-                style="width: 100%; height: 689px;">
-              <map  name="planetmap9" id="planetmap9">
-                <area  shape="rect" coords="0,0,375,151">
-                <area  shape="rect" coords="11,158,183,330">
-                <area  shape="rect" coords="187,158,371,337">
-                <area  shape="rect" coords="11,330,180,503">
-                <area  shape="rect" coords="183,330,371,503">
-                <area  shape="rect" coords="7,503,176,675">
-                <area  shape="rect" coords="183,503,367,675">
-              </map>
-            </div>
-          </div>
-        </div> <!---->
+        </div><!---->
       </mt-loadmore>
     </div> <!---->
-    <div  class="wrap-shelf" style="margin: -8em auto 2em;"></div> <!---->
+    <!---->
   </article>
 </template>
 
 <script>
-  import {Swipe, SwipeItem, Loadmore } from 'mint-ui'
+  import Vue from 'vue'
+  import {Swipe, SwipeItem, Loadmore, Lazyload  } from 'mint-ui'
+  Vue.use(Lazyload);
   export default {
     data(){
       return {
@@ -249,13 +211,15 @@
     methods: {
 
       loadTop() {
-        this.$refs.loadmore.onTopLoaded();
+        setTimeout(()=>{
+          this.$refs.loadmore.onTopLoaded();
+        },1000)
       },
       loadBottom() {
-        setTimeout(()=>{
+       /* setTimeout(()=>{
           this.allLoaded = true;// 若数据已全部获取完毕
           this.$refs.loadmore.onBottomLoaded();
-        },5000)
+        },5000)*/
       }
     },
     components:{

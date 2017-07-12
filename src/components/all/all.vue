@@ -5,20 +5,13 @@
         <p class="header-title">全部产品</p>
       </div>
       <div id="wrap" class="search-panel">
-        <div id="search-bar">
-          <form action="">
-            <input type="search" placeholder="搜索商品" class="searchinput changeStyle">
-            <input id="btnCancel" type="button" value="取消" class="sch-cancel">
-          </form>
-        </div>
+        <mt-search
+            cancel-text="取消"
+            placeholder="搜索商品">
+        </mt-search>
       </div>
     </header>
-      <div id="content-wrap" style="position: absolute; width: 100%; top: 96px; height: 516px; overflow-y: scroll;">
-        <mt-loadmore :top-method="loadTop"
-                     :bottom-method="loadBottom"
-                     :bottom-all-loaded="allLoaded"
-                     :maxDistance="180"
-                     ref="loadmore">
+      <div id="content-wrap">
         <div class="life-module">
           <div class="life-goodsAll">
             <div class="life-goodsBox"><!---->
@@ -127,40 +120,31 @@
             </div>
           </div>
         </div>
-        </mt-loadmore>
       </div>
   </div>
 </template>
 
 <script>
-  import {Search, Loadmore} from 'mint-ui'
+  import {Search} from 'mint-ui'
   export default {
     data(){
       return {
-        allLoaded:false
+
       }
     },
     methods: {
-      loadTop() {
-        this.$refs.loadmore.onTopLoaded();
-      },
-      loadBottom() {
-       /* setTimeout(()=>{
-          this.allLoaded = true;// 若数据已全部获取完毕
-          this.$refs.loadmore.onBottomLoaded();
-        },5000)*/
-        /*this.allLoaded = true;// 若数据已全部获取完毕
-        this.$refs.loadmore.onBottomLoaded();*/
-      }
+
     },
     components:{
-      'mt-loadmore':Loadmore,
       'mt-search':Search
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  #content-wrap{
+    margin-top 8rem
+  }
   header {
     padding: 0;
     width: 100%;
@@ -242,7 +226,41 @@
     line-height: 3rem;
     outline:none
   }
+//search
+  .mint-search{
+    height:100%
+  }
+  .mint-searchbar{
+    background-color: transparent;
+  }
+  .mint-searchbar-inner{
+    border-radius 6px
+  }
+  .mint-searchbar-inner .mintui-search{
+    position: absolute;
+    left: 135px;
+    font-size: 20px;
+    top: 16px;
+  }
+  .mint-searchbar-core{
+    text-align center
+    font-size: 16px;
+    padding-left: 22px
+  }
+  .mint-searchbar-cancel{
+    width: 10%;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #83b842;
+    line-height: 3rem;
+  }
 
+
+
+  ::-webkit-scrollbar{
+    width:4px
+    background-color: #fff;
+  }
   .changeStyle {
     width: 88% !important;
     background-position: .4rem .5rem !important;
@@ -300,5 +318,14 @@
     padding-bottom: 1rem;
     padding-top: .5rem;
     font-size: 1.3rem;
+  }
+
+  .mint-searchbar-core:focus {
+    text-align: left;
+    padding-left: 30px;
+  }
+  .mint-searchbar-inner .mintui-search{
+    left: 20px;
+    top: 18px;
   }
 </style>

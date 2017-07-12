@@ -90,11 +90,15 @@
     },
     methods: {
       loadTop() {
-        this.$refs.loadmore.onTopLoaded();
+        setTimeout(()=>{
+          this.$refs.loadmore.onTopLoaded();
+        },1000)
       },
       loadBottom() {
-        this.allLoaded = true;// 若数据已全部获取完毕
-        this.$refs.loadmore.onBottomLoaded();
+        setTimeout(()=>{
+          this.allLoaded = true;// 若数据已全部获取完毕
+          this.$refs.loadmore.onBottomLoaded();
+        },1000)
       }
     },
     components:{
