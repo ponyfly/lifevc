@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="toTop" style="display: none;"></div>
     <div id="stroll-header"><!---->
       <header id="topbar" class="header">
         <div class="header-content"> <!---->
@@ -8,150 +7,55 @@
         </div>
       </header>
     </div>
+
     <div class="page-loadmore-wrapper" style="margin-top: 48px;">
       <mt-loadmore :top-method="loadTop"
                    :bottom-method="loadBottom"
                    :bottom-all-loaded="allLoaded"
                    :maxDistance="180"
                    ref="loadmore">
-        <div class="clearFix">
+        <div class="clearFix" v-if="randomWares">
           <div class="stroll-all-item">
             <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/e726ff1fb1d44685a91cf76ff56d5018.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">分类整理收纳箱</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>49</em></span> <span
-                    class="comment">月销 2662</span></div>
-              </div> <!----> <!----></div><!----><!----><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/33b9b2000fe24e2083f22620658f3ad1.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">电蚊香</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>29</em></span> <span
-                    class="comment">月销 4416</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/5b388119f79444ba889c4f6b9a118bad.jpg"
-                                                    lazy="loaded"> <!----></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">加拿大原生木浆抽纸（12包）</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>29</em></span> <span
-                    class="comment">月销 7317</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/06cde94e3e4f4c2093b33fdcb1cb4726.jpg"
-                                                    lazy="loaded"> <!----></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">可挂式防潮除湿剂(8袋装)</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>30</em></span> <span
-                    class="comment">月销 4511</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/31ba2fd1d25242889a094cae65568ba6.jpg"
-                                                    lazy="loaded"> <!----></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">植物精粹面膜礼盒(15片装)</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>69</em></span> <span
-                    class="comment">月销 3172</span></div>
-              </div> <!----> <!----></div><!---->
-          </div>
-          <div class="stroll-all-item"><!---->
-            <div class="stroll-item"><!----> <!---->
-              <div class="stroll-type-item  clearFix">
-                <div class="cat-menu-a"><span>49元包1年</span></div>
-                <div class="cat-menu-a"><span>今日新品</span></div>
-                <div class="cat-menu-a"><span>送500元积分</span></div>
-                <div class="cat-menu-a"><span>金币商城</span></div>
-              </div>
-            </div>
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/9c66a042b58048219b6c5c1290426c94.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">全棉舒适四件套(绵羊)</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>269</em><span
-                    class="original">￥319</span></span> <span class="comment">月销 1681</span></div>
+              <div class="stroll-type-item" v-for="ware in wares">
+                <div class="stroll-item-layer">
+                  <img class="stroll-item-img" :src="ware.image">
+                  <span class="tag-new">New</span>
+                </div>
+                <h3 class="stroll-item-title">
+                  <a href="javascript:void(0);">{{ware.name}}</a>
+                </h3>
+                <div class="stroll-price-bar">
+                  <span class="price">￥<em>{{ware.price}}</em></span>
+                  <span class="comment">月销 {{ware.sellCount}}</span></div>
               </div> <!----> <!----></div>
+          </div>
+          <div class="stroll-all-item">
             <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/865c7b1282a84b239d5f5d5c28972c2b.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">全效洗衣液(5合1)</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>39</em></span> <span
-                    class="comment">月销 4354</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/e2b2e00afcbf428a8da047d73f7fa168.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">耐磨高弹力旅行箱保护套</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>39</em><span
-                    class="original">￥49</span></span> <span class="comment">月销 5368</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/f5dd292151a24a078dd24945c6b80695.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">8K玻纤晴雨两用伞(抗UV)</a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>69</em></span> <span
-                    class="comment">月销 2406</span></div>
-              </div> <!----> <!----></div><!---->
-            <div class="stroll-item">
-              <div class="stroll-type-item">
-                <div class="stroll-item-layer"><img class="stroll-item-img"
-                                                    src="http://i.lifevccdn.com/upload/stroll/d96367576ffb4714bd81d34259e2b84c.jpg"
-                                                    lazy="loaded"> <span class="tag-new">New</span></div>
-                <h3 class="stroll-item-title"><a href="javascript:void(0);">专业防水运动包 </a></h3>
-                <div class="stroll-price-bar"><span class="price">￥<em>49</em></span> <span
-                    class="comment">月销 2616</span></div>
-              </div> <!----> <!----></div><!---->
+              <div class="stroll-type-item" v-for="ware in sortWares">
+                <div class="stroll-item-layer">
+                  <img class="stroll-item-img" :src="ware.image">
+                  <span class="tag-new">New</span>
+                </div>
+                <h3 class="stroll-item-title">
+                  <a href="javascript:void(0);">{{ware.name}}</a>
+                </h3>
+                <div class="stroll-price-bar">
+                  <span class="price">￥<em>{{ware.price}}</em></span>
+                  <span class="comment">月销 {{ware.sellCount}}</span></div>
+              </div> <!----> <!----></div>
           </div>
         </div>
       </mt-loadmore>
-      <!--<div class="stroll-bottom" style="display: none;">
-        <div class="stroll-loading"><span class="cont"></span><span
-            class="snakehead"></span></div>
-        <div class="stroll-bottom-txt">加载中</div>
-      </div>&lt;!&ndash;&ndash;&gt;-->
     </div>
 
-    <footer id="bottombar" class="footer">
-      <div>
-        <ul id="footermenuNav">
-          <li><a href="#/" class="">
-            <div class="ico homeico"></div>
-            <span class="lispan">首页</span></a></li>
-          <li><a href="#/all" class="">
-            <div class="ico typeico"></div>
-            <span>全部产品</span></a></li>
-          <li><a href="#/stroll" class="selected">
-            <div class="ico strollico"></div>
-            <span>闲逛</span></a></li>
-          <li><a href="#/cart" class="">
-            <div class="ico shoppingcartico"></div>
-            <span>购物车</span> <!----> <!----></a></li>
-          <li><a href="#/usercenter" class="">
-            <div class="ico accountcenterico"></div>
-            <span>账户中心</span> <span class=""></span></a></li>
-        </ul>
-      </div>
-    </footer> <!----></div>
+   </div>
 </template>
 
 <script>
   import {Loadmore} from 'mint-ui'
   export default {
+    props:['randomWares'],
     data(){
       return {
         allLoaded: false
@@ -168,10 +72,27 @@
         },5000)
       }
     },
+    computed:{
+      wares(){
+        let newWares = [];
+        this.randomWares.forEach(wares=>{
+          wares.forEach(ware=>{
+            newWares.push(ware)
+          })
+        })
+        return newWares
+      },
+      sortWares(){
+        return this.wares.reverse()
+      }
+    },
     components: {
       'mt-loadmore': Loadmore
     }
   }
+
+
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

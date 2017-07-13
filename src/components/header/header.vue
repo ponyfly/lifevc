@@ -8,15 +8,9 @@
       <div title="分类导航条" class="wrap-menuNavNewProduct">
         <div id="navPanelDiv" class="menuNavNewProductPanel" ref="menuNavNewProductPanel">
           <ul id="navUL" class="menuNavNewProduct" style="width: 800px;" ref="menuNavNewProduct">
-            <li class="font-large"><router-link to="/home" default-active="1">首页</router-link></li> <!---->
-            <li class="font-large"><router-link to="/new">新品</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2866">家务</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2864">下厨</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2865">家居服</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2861">生活</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2860">软装</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2862">床品</router-link></li> <!---->
-            <li class="font-large"><router-link to="/channel/2863">工作和旅行</router-link></li> <!----><!---->
+            <li class="font-large" v-for="(navItem,index) in navLists">
+              <router-link :to="`/${navItem.url}/${navItem.id}`">{{navItem.name}}</router-link>
+            </li>
             <li class="font-large">
               <a href="javascript:void(0)"
                  @click.stop.prevent="knowShow(false)">了解LifeVC
@@ -26,21 +20,28 @@
         </div>
       </div>
     </header>
-    <knowmore v-show="!knowMoreShow" @knowShow="knowShow"></knowmore>
+
+    <knowmore v-show="!knowMoreShow"
+              @knowShow="knowShow">
+    </knowmore>
   </div>
 
 </template>
 
 <script>
+  import axios from 'axios'
   import knowmore from '../knowmore/knowmore.vue'
   import BScroll from 'better-scroll'
+
   export default {
+    props:['navLists'],
     data(){
       return {
-        knowMoreShow:true
+        knowMoreShow:true,
       }
     },
     created(){
+
       this.$nextTick(()=>{
         new BScroll(this.$refs.menuNavNewProductPanel,{
           click:true,
@@ -50,7 +51,9 @@
         })
       })
     },
-    computed: {},
+    computed: {
+
+    },
     methods: {
       knowShow(isShow){
         this.knowMoreShow = isShow

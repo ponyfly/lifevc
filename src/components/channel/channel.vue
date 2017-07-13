@@ -1,135 +1,58 @@
 <template>
   <div class="channel-wrap">
-    <lf-header></lf-header>
-    <h1>{{channelName}}</h1>
+    <lf-header :navLists="navLists"></lf-header>
+    <h1>{{currentGood.name}}</h1>
     <div class="main-body-shelf">
       <div class="lf-loadmore">
         <ul id="blockcartegory" class="life-goodsUl clearFix life-child-thank">
-          <li><a href="#/channelsub/2859/2869" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/a3628c4600c74cf2b2cce44eff7ffcf7.jpg"
-              lazy="loaded">
-            <dl>不粘锅</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/3351" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/f372190e2e8543afafff1735da48a871.jpg"
-              lazy="loaded">
-            <dl>多功能锅</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2872" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/d20af14942824632a588b5253e0123c4.jpg"
-              lazy="loaded">
-            <dl>水壶水杯</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2871" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/9bb5047d7ea84fa48992939c6c64c123.jpg"
-              lazy="loaded">
-            <dl>厨房电器</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2868" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/96079b6d4fcf4c45b972f815dbe27fcb.jpg"
-              lazy="loaded">
-            <dl>厨房小帮手</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2875" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/4fada1bbc1ef4f1288c123044dc1a69a.jpg"
-              lazy="loaded">
-            <dl>刀具</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2876" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/16d5b0459ee34b9c9ca7ccd16ff7561a.jpg"
-              lazy="loaded">
-            <dl>餐具</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2870" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/d0e01200cefd4b658be736f064507fad.jpg"
-              lazy="loaded">
-            <dl>净水器</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2873" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/726881bfc9ad4874a658683a72f4910c.jpg"
-              lazy="loaded">
-            <dl>保温杯</dl>
-          </a></li>
-          <li><a href="#/channelsub/2859/2874" class=""
-          ><img
-              src="http://i.lifevccdn.com/upload/AppIndexIcon/70e0e1ec4d274b77bd27e8c306409063.jpg"
-              lazy="loaded">
-            <dl>焖烧罐</dl>
-          </a></li>
+          <li v-for="product in currentGood.products">
+            <router-link :to="`/channelsub/${$route.params.id}/3351`">
+              <img :src="product.image">
+              <dl>{{product.name}}</dl>
+            </router-link>
+          </li>
         </ul>
-        <div id="category-banner" class="category-banner"><img
-
-            src="http://i.lifevccdn.com/upload/DesignerMessageImg/6d2115bb205649fd81a5a028a3142354.jpg"
+        <div id="category-banner" class="category-banner">
+          <img src="http://i.lifevccdn.com/upload/DesignerMessageImg/6d2115bb205649fd81a5a028a3142354.jpg"
             onerror="this.style.display='none'"
             class="item-pic">
         </div>
         <div id="ceoRecommend" class="wrap-shelf">
           <div class="subcat-title">Rico.S的精心推荐：</div>
-          <div class="shelf-item" style="position: relative;">
-            <a class="item-pic-bx"><img class="item-pic"
-                                        src="http://i.lifevccdn.com/upload/AppItemInfoImage/d419d0f310e44e5b87b68983f00b07d5_d1242x0.jpg"
-                                        lazy="loaded"> <!---->
+          <div class="shelf-item" style="position: relative;"  v-for="ware in randomWares">
+            <a class="item-pic-bx">
+              <img class="item-pic" :src="ware.image"> <!---->
               <div class="item-status-empty" style="display: none;">
                 热卖脱销
               </div>
             </a>
             <div class="item-panel">
               <div class="title clearFix">
-                女生专用省力开瓶器
+                {{ware.name}}
               </div>
               <div class="item-price">
-                <div class="price-cont"><span class="act-tag"
-                                              style="display: none;"></span> <span
-                >￥</span> <span>9</span>&nbsp;
-                  <span class="original-price"></span> <span
-                      class="promo-lable">新</span></div>
-                <div class="item-comment">评论：0</div>
-              </div>
-            </div>
-            <div></div>
-          </div>
-          <div class="shelf-item" style="position: relative;">
-            <a class="item-pic-bx"><img class="item-pic"
-                                        src="http://i.lifevccdn.com/upload/AppItemInfoImage/e665e6c961d9427885d53d97d9ef796a_d1242x0.jpg"
-                                        lazy="loaded"> <!---->
-              <div class="item-status-empty" style="display: none;">
-                热卖脱销
-              </div>
-            </a>
-            <div class="item-panel">
-              <div class="title clearFix">
-                耐高温玻璃饭盒
-              </div>
-              <div class="item-price">
-                <div class="price-cont"><span class="act-tag">限时体验价</span> <span
-                >￥</span> <span>19</span>&nbsp;
-                  <span class="original-price">￥29</span> <span
-                      class="promo-lable">新</span></div>
-                <div class="item-comment">评论：0</div>
+                <div class="price-cont">
+                  <span class="act-tag">限时体验价</span>
+                  <span>￥</span> <span>{{ware.price}}</span>&nbsp;
+                  <span class="original-price">￥{{ware.oldPrice}}</span>
+                  <span class="promo-lable" v-show="ware.newWare">新</span>
+                </div>
+                <div class="item-comment">评论：{{ware.ratings.length}}</div>
               </div>
             </div>
             <div></div>
           </div>
         </div>
-        <div id="wrap_shelf_nav" class="wrap-shelf-navs clearFix"
+        <!--<div id="wrap_shelf_nav" class="wrap-shelf-navs clearFix"
              style="display: block;">
           <div id="wrap_shelf_nav_sort"
                style="width: 100%; z-index: 105; position: relative; top: 0px;">
             <ul class="life-sort has-filter clearFix">
-              <li><a class="">新品</a></li>
-              <li><a class="">畅销</a></li>
-              <li><a class=""><em>价格</em> <i
-                  class=""></i></a></li>
-              <li><a class=""><em>需求筛选</em> <span
+              <li><a>新品</a></li>
+              <li><a>畅销</a></li>
+              <li><a><em>价格</em> <i
+              ></i></a></li>
+              <li><a><em>需求筛选</em> <span
                   class="filter"></span></a></li>
             </ul>
           </div>
@@ -138,7 +61,7 @@
           <div class="shelf-item" style="position: relative;">
             <a class="item-pic-bx"><img class="item-pic"
                                         src="http://i.lifevccdn.com/upload/AppItemInfoImage/7430df5fa7b24de2a7a523698aeeaabc_d1242x0.jpg"
-                                        lazy="loaded"> <!---->
+                                        lazy="loaded"> &lt;!&ndash;&ndash;&gt;
               <div class="item-status-empty" style="display: none;">
                 热卖脱销
               </div>
@@ -161,7 +84,7 @@
           <div class="shelf-item" style="position: relative;">
             <a class="item-pic-bx"><img class="item-pic"
                                         src="http://i.lifevccdn.com/upload/AppItemInfoImage/e50dc0d1663744c0b63135ca1d05cc12_d1242x0.jpg"
-                                        lazy="loaded"> <!---->
+                                        lazy="loaded"> &lt;!&ndash;&ndash;&gt;
               <div class="item-status-empty" style="display: none;">
                 热卖脱销
               </div>
@@ -184,7 +107,7 @@
           <div class="shelf-item" style="position: relative;">
             <a class="item-pic-bx"><img class="item-pic"
                                         src="http://i.lifevccdn.com/upload/AppItemInfoImage/4ef4ff5fd68f4fbe806e3e202d12f877_d1242x0.jpg"
-                                        lazy="loaded"> <!---->
+                                        lazy="loaded"> &lt;!&ndash;&ndash;&gt;
               <div class="item-status-empty" style="display: none;">
                 热卖脱销
               </div>
@@ -204,7 +127,7 @@
             </div>
             <div></div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
@@ -212,24 +135,27 @@
 <script>
   import header from '../header/header.vue'
   export default {
+    props:['navLists','goods'],
     data(){
       return {
-        channels:[
-          {id:2860,name:'软装'},
-          {id:2861,name:'生活'},
-          {id:2862,name:'床品'},
-          {id:2863,name:'工作和旅行'},
-          {id:2864,name:'下厨'},
-          {id:2865,name:'家居服'},
-          {id:2866,name:'家务'},
-        ]
       }
     },
     computed: {
-       channelName(){
-         if(!this.$route.params.id) return
-          return this.channels.find(channel=>channel.id==this.$route.params.id).name
-       }
+      currentGood(){
+        if(!this.$route.params.id) return
+        return this.goods.find(good=>good.id==this.$route.params.id)
+      },
+      randomWares(){
+        let wares = [];
+        this.currentGood.products.forEach(product=>{
+          product.wares.forEach(ware=>{
+            if(ware.sellCount<600){
+              wares.push(ware)
+            }
+          })
+        })
+        return wares
+      }
     },
     methods: {},
     components:{
@@ -244,9 +170,9 @@
     background-color: #f2f2f2;
   }
   h1{
-    height: 5rem
-    font-size 3rem
-    line-height 5rem
+    height: 49px
+    font-size 1.9rem
+    line-height 49px
     text-align center
   }
   .life-goodsUl {

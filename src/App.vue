@@ -1,29 +1,82 @@
 <template>
   <div>
     <keep-alive>
-      <router-view></router-view>
+      <router-view
+          :navLists="navLists"
+          :comboImages="comboImages"
+          :goods="goods"
+          :randomWares="randomWares">
+      </router-view>
     </keep-alive>
     <lf-footer v-if="isShow"></lf-footer>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   import footer from './components/footer/footer.vue'
   export default {
     data(){
       return {
         width:0,
-        isShow:true
+        isShow:true,
+        lifeInfo:{},
+        goods:[]
       }
     },
     created(){
       this.styleN = document.createElement('style');
       this._initStyle()
+        //发送请求获取数据
+      axios.get('/life/webinfos')
+        .then(res=>{
+          this.lifeInfo = res.data;
+        })
+        .catch(err=>{
+          console.log('something wrong')
+        })
+      axios.get('/life/goods')
+        .then(res=>{
+          this.goods = res.data;
+        })
+        .catch(err=>{
+          console.log('something wrong')
+        })
     },
     updated(){
       this._initStyle()
     },
-    computed:{},
+    computed:{
+      navLists(){
+        if(this.lifeInfo.name){
+          return this.lifeInfo.cates.map(cate=>{
+            return {
+              name:cate.name,
+              id:cate.id,
+              url:cate.url
+            }
+          })
+        }
+      },
+      comboImages(){
+        if(this.lifeInfo.name){
+          return this.lifeInfo.cates.filter(cate=>{
+            return cate.comboImage
+          })
+        }
+      },
+      randomWares(){
+        if(this.goods.length){
+          return this.goods.map(good=>{
+            return good.products.map(product=>{
+              return product.wares.find(ware=>{
+                return ware.sellCount>1000
+              })
+            })
+          })
+        }
+      }
+    },
     methods:{
       _initStyle(){
         if(this.$route.path!='/login' && this.$route.path!='/register'){

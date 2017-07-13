@@ -14,107 +14,13 @@
       <div id="content-wrap">
         <div class="life-module">
           <div class="life-goodsAll">
-            <div class="life-goodsBox"><!---->
+            <div class="life-goodsBox"  v-for="good in goods"><!---->
               <div class="life-goodsTip">
-                <dl class="life-goodsMark">家务</dl> <!----></div>
+                <dl class="life-goodsMark">{{good.name}}</dl> <!----></div>
               <ul class="life-goodsUl clearFix onlyStyle">
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/54079a754099447281e284d45a5c078b.jpg"
-                    lazy="loaded">
+                <li style="height: 138px;" v-for="product in good.products">
+                  <img :src="product.image">
                   <dl>家务工具</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/04597da396224b39a5184c7b031c507d.jpg" lazy="loaded">
-                  <dl>家庭清洁剂</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/f14c5afd18a74be197bbef999e58387e.jpg"
-                    lazy="loaded">
-                  <dl>防霉除菌</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/4f4dc02735f74e568d7adbe6ac1522f2.jpg"
-                    lazy="loaded">
-                  <dl>百纳箱</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/33daaf6cfaa345e8a475ce8ea932a393.jpg"
-                    lazy="loaded">
-                  <dl>衣物收纳</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/9bbb1b97d5c04460a76fde006f08c6ea.jpg"
-                    lazy="loaded">
-                  <dl>酵素洗衣液</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/4a8a241b4f7041b2b6bd9bfa1d24a87c.jpg"
-                    lazy="loaded">
-                  <dl>魔力挂钩</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/6f88e8a13af944019d6b8cee8c723b7e.jpg"
-                    lazy="loaded">
-                  <dl>生活必备</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/eef70d4649914a2c9323e16c9907d62d.jpg"
-                    lazy="loaded">
-                  <dl>地毯地垫</dl>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="life-module">
-          <div class="life-goodsAll">
-            <div class="life-goodsBox"><!---->
-              <div class="life-goodsTip">
-                <dl class="life-goodsMark">搬家</dl> <!----></div>
-              <ul class="life-goodsUl clearFix onlyStyle">
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/54079a754099447281e284d45a5c078b.jpg"
-                    lazy="loaded">
-                  <dl>家务工具</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/04597da396224b39a5184c7b031c507d.jpg" lazy="loaded">
-                  <dl>家庭清洁剂</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/f14c5afd18a74be197bbef999e58387e.jpg"
-                    lazy="loaded">
-                  <dl>防霉除菌</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/4f4dc02735f74e568d7adbe6ac1522f2.jpg"
-                    lazy="loaded">
-                  <dl>百纳箱</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/33daaf6cfaa345e8a475ce8ea932a393.jpg"
-                    lazy="loaded">
-                  <dl>衣物收纳</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/9bbb1b97d5c04460a76fde006f08c6ea.jpg"
-                    lazy="loaded">
-                  <dl>酵素洗衣液</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/4a8a241b4f7041b2b6bd9bfa1d24a87c.jpg"
-                    lazy="loaded">
-                  <dl>魔力挂钩</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/6f88e8a13af944019d6b8cee8c723b7e.jpg"
-                    lazy="loaded">
-                  <dl>生活必备</dl>
-                </li>
-                <li style="height: 138px;"><img
-                    src="http://i.lifevccdn.com/upload/AppIndexIcon/eef70d4649914a2c9323e16c9907d62d.jpg"
-                    lazy="loaded">
-                  <dl>地毯地垫</dl>
                 </li>
               </ul>
             </div>
@@ -127,6 +33,9 @@
 <script>
   import {Search} from 'mint-ui'
   export default {
+    props:{
+      goods:Array
+    },
     data(){
       return {
 
@@ -134,6 +43,11 @@
     },
     methods: {
 
+    },
+    created(){
+      console.log(this.goods);
+    },
+    computed:{
     },
     components:{
       'mt-search':Search

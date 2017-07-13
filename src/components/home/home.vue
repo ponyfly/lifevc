@@ -1,19 +1,28 @@
 
 <template>
   <div><!---->
-    <lf-header></lf-header>
-    <homebody></homebody>
+    <lf-header :navLists="navLists"></lf-header>
+    <homebody :comboImages="comboImages"></homebody>
   </div>
 </template>
 
 <script>
+
   import header from '../header/header.vue'
   import homebody from '../homebody/homebody.vue'
   export default {
+    props:['navLists','comboImages'],
     data(){
-      return {}
+      return {
+        goods:[]
+      }
     },
-    computed: {},
+    created(){
+
+    },
+    computed: {
+
+    },
     methods: {},
     components:{
       homebody,

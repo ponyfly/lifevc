@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 export default new VueRouter({
   linkActiveClass:'selected',
   routes: [
-    {path:'/',component:home},
+    {path:'/',redirect:'/home'},
     {path: '/home', component: home},
     {path: '/all', component: all},
     {path: '/stroll', component: stroll},

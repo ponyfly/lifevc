@@ -151,12 +151,12 @@
             </div>
           </div>
         </div>
-        <div class="item-combo">
+        <div class="item-combo" v-for="combo in comboImages">
           <div   title="组合图活动">
             <div  class="combo-title"></div>
             <div  class="img-wrap" style="height: 689px;"><img
                 usemap="#planetmap6"
-                src="http://i.lifevccdn.com/upload/combinationchart/3da3d66f3c934a1285dd686cb28a1c90_d1242x0.jpg"
+                  :src="combo.comboImage"
                 lazy="loaded"
                 style="width: 100%; height: 689px;">
               <map  name="planetmap6" id="planetmap6">
@@ -167,26 +167,6 @@
                 <area  shape="rect" coords="183,337,367,509">
                 <area  shape="rect" coords="3,516,180,682">
                 <area  shape="rect" coords="187,516,367,675">
-              </map>
-            </div>
-          </div>
-        </div>
-        <div class="item-combo">
-          <div   title="组合图活动">
-            <div  class="combo-title"></div>
-            <div  class="img-wrap" style="height: 689px;"><img
-                usemap="#planetmap7"
-                src="http://i.lifevccdn.com/upload/combinationchart/5e1e40565e5147a8849f73b630ba0a60_d1242x0.jpg"
-                lazy="loading"
-                style="width: 100%; height: 689px;">
-              <map  name="planetmap7" id="planetmap7">
-                <area  shape="rect" coords="0,0,375,151">
-                <area  shape="rect" coords="7,165,183,330">
-                <area  shape="rect" coords="191,158,371,330">
-                <area  shape="rect" coords="7,330,183,503">
-                <area  shape="rect" coords="191,330,367,496">
-                <area  shape="rect" coords="7,503,183,675">
-                <area  shape="rect" coords="187,503,367,675">
               </map>
             </div>
           </div>
@@ -202,6 +182,7 @@
   import {Swipe, SwipeItem, Loadmore, Lazyload  } from 'mint-ui'
   Vue.use(Lazyload);
   export default {
+    props:['comboImages'],
     data(){
       return {
         allLoaded: false

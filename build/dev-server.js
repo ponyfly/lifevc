@@ -21,6 +21,21 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+
+const data = require('../src/mock/life.json')
+const router = express.Router();
+
+router.get('/life/webinfos',(req,res,next)=>{
+  res.set("Access-Control-Allow-Origin", "*")
+  res.json(data.lifeInfo)
+})
+router.get('/life/goods',(req,res,next)=>{
+  res.set("Access-Control-Allow-Origin", "*")
+  res.json(data.goods)
+})
+
+app.use(router)
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
