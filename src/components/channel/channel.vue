@@ -1,5 +1,5 @@
 <template>
-  <div class="channel-wrap">
+  <div class="channel-wrap" v-if="currentGood">
     <lf-header :navLists="navLists"></lf-header>
     <h1>{{currentGood.name}}</h1>
     <div class="main-body-shelf">
@@ -146,10 +146,11 @@
         return this.goods.find(good=>good.id==this.$route.params.id)
       },
       randomWares(){
+        if(!this.$route.params.id) return
         let wares = [];
         this.currentGood.products.forEach(product=>{
           product.wares.forEach(ware=>{
-            if(ware.sellCount<600){
+            if(ware.sellCount<3600){
               wares.push(ware)
             }
           })

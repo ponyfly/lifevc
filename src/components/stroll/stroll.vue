@@ -269,13 +269,13 @@
     text-align: left;
     width: 100%;
     font-size: .9rem;
-    height: 1.5rem;
+    height: 2rem;
     overflow: hidden;
   }
 
   .stroll-price-bar .price {
     font-size: 1.8rem;
-    line-height: 1.5rem;
+    line-height: 2rem;
     display: inline-block;
     color: #ff475d;
     font-weight: 400;
