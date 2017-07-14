@@ -19,8 +19,10 @@
                 <dl class="life-goodsMark">{{good.name}}</dl> <!----></div>
               <ul class="life-goodsUl clearFix onlyStyle">
                 <li style="height: 138px;" v-for="product in good.products">
-                  <img :src="product.image">
-                  <dl>家务工具</dl>
+                  <router-link :to="`/channelsub/${good.id}/${2877}`">
+                    <img :src="product.image">
+                    <dl>{{product.name}}</dl>
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -37,17 +39,12 @@
       goods:Array
     },
     data(){
-      return {
-
-      }
+      return {}
     },
     methods: {
-
     },
-    created(){
-    },
-    computed:{
-    },
+    created(){},
+    computed:{},
     components:{
       'mt-search':Search
     }

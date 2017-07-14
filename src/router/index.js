@@ -9,6 +9,7 @@ import newproduct from '../components/newproduct/newproduct.vue'
 import channel from '../components/channel/channel.vue'
 import login from '../components/login/login.vue'
 import register from '../components/register/register.vue'
+import channelsub from '../components/channelsub/channelsub.vue'
 
 Vue.use(VueRouter)
 
@@ -25,5 +26,6 @@ export default new VueRouter({
     {path: '/channel/:id', component: channel},
     {path: '/login', component: login},
     {path: '/register', component: register},
+    {path: '/channelsub/:goodId/:productId', component: channelsub},
   ]
 })
