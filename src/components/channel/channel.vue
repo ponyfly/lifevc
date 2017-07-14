@@ -19,7 +19,7 @@
         </div>
         <div id="ceoRecommend" class="wrap-shelf">
           <div class="subcat-title">Rico.S的精心推荐：</div>
-          <div class="shelf-item" style="position: relative;"  v-for="ware in randomWares">
+          <div class="shelf-item"  v-for="ware in randomWares">
             <a class="item-pic-bx">
               <img class="item-pic" :src="ware.image"> <!---->
               <div class="item-status-empty" style="display: none;">
@@ -34,7 +34,7 @@
                 <div class="price-cont">
                   <span class="act-tag">限时体验价</span>
                   <span>￥</span> <span>{{ware.price}}</span>&nbsp;
-                  <span class="original-price">￥{{ware.oldPrice}}</span>
+                  <span class="original-price" v-show="ware.oldPrice">￥{{ware.oldPrice}}</span>
                   <span class="promo-lable" v-show="ware.newWare">新</span>
                 </div>
                 <div class="item-comment">评论：{{ware.ratings.length}}</div>

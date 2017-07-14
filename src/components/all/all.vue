@@ -45,7 +45,6 @@
 
     },
     created(){
-      console.log(this.goods);
     },
     computed:{
     },

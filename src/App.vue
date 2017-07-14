@@ -43,9 +43,6 @@
           console.log('something wrong')
         })
     },
-    updated(){
-      this._initStyle()
-    },
     computed:{
       navLists(){
         if(this.lifeInfo.name){
@@ -76,6 +73,17 @@
           })
         }
       }
+    },
+    watch:{
+      "$route":{
+        handler(){
+          document.body.scrollTop = 0;
+        },
+        deep:true
+      }
+    },
+    updated(){
+      this._initStyle()
     },
     methods:{
       _initStyle(){
