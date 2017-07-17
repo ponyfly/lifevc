@@ -5,7 +5,9 @@
           :navLists="navLists"
           :comboImages="comboImages"
           :goods="goods"
-          :randomWares="randomWares">
+          :randomWares="randomWares"
+          :username="username"
+          :updateUsername="updateUsername">
       </router-view>
     </keep-alive>
     <lf-footer v-if="isShow"></lf-footer>
@@ -21,11 +23,13 @@
         width:0,
         isShow:true,
         lifeInfo:{},
-        goods:[]
+        goods:[],
+        username:''
       }
     },
     created(){
       this.styleN = document.createElement('style');
+      this._initFooter(this.$route.path)
       this._initStyle()
         //发送请求获取数据
       axios.get('/life/webinfos')
@@ -83,16 +87,7 @@
       },
       "$route.path":{
         handler(newVal){
-          if(
-            newVal.indexOf('channelsub')>0 ||
-            newVal.indexOf('login')>0 ||
-            newVal.indexOf('register')>0 ||
-            newVal.indexOf('item')>0
-          ){
-            this.isShow=false
-          }else{
-            this.isShow = true
-          }
+          this._initFooter(newVal)
         }
       }
     },
@@ -100,6 +95,18 @@
       this._initStyle()
     },
     methods:{
+      _initFooter(newVal){
+        if(
+          newVal.indexOf('channelsub')>0 ||
+          newVal.indexOf('login')>0 ||
+          newVal.indexOf('register')>0 ||
+          newVal.indexOf('item')>0
+        ){
+          this.isShow=false
+        }else{
+          this.isShow = true
+        }
+      },
       _initStyle(){
         if(this.$route.path!='/login' && this.$route.path!='/register'){
           this.width = 375/36;
@@ -109,6 +116,9 @@
         this.styleN.innerHTML = 'html{font-size: '+this.width +'px !important;}';
         document.head.appendChild(this.styleN);
       },
+      updateUsername(username){
+        this.username = username
+      }
     },
     components:{
       'lf-footer':footer,

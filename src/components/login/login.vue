@@ -29,10 +29,10 @@
             <form id="login-form">
               <ul class="fm_list">
                 <li>
-                  <input type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt">
+                  <input type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt" v-model="phone">
                 </li>
                 <li class="multi">
-                  <input type="password" maxlength="20" placeholder="请输入登录密码" required="required" class="field_ipt">
+                  <input type="password" maxlength="20" placeholder="请输入登录密码" required="required" class="field_ipt" v-model="password">
                   <a class="fidld_skip">忘记密码</a>
                 </li>
               </ul>
@@ -41,7 +41,7 @@
               </div>
             </form>
           </div>
-          <input type="button" value="登录" class="btn_login">
+          <input type="button" value="登录" class="btn_login" @click="login">
           <input type="button" value="注册" class="btn_regisiter" @click="goRegister">
         </div>
       </div>
@@ -50,11 +50,16 @@
 </template>
 
 <script>
-
+  import axios from 'axios'
   export default {
+    props:{
+      updateUsername:Function
+    },
     data(){
       return {
-        isShow:true
+        isShow:false,
+        phone:'',
+        password:''
       }
     },
     created(){
@@ -70,6 +75,19 @@
       },
       goRegister(){
         this.$router.push({path:'/register'})
+      },
+      login(){
+        let {phone, password} = this
+        axios.post('/login',{
+          phone,
+          password
+        })
+          .then(res=>{
+            let {username} = res.data
+            console.log(res);
+            this.updateUsername(username)
+            this.$router.push({path:'/usercenter'})
+          })
       }
     },
   }

@@ -10,8 +10,8 @@
           <div>
             <form id="register-form">
               <ul class="fm_list register_distance">
-                <li><input id="txtMobile" type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt"></li>
-                <li><input type="text" maxlength="20" placeholder="请设置6-20位密码,包含字母、数字或符号" id="regPwd" required="required" class="field_ipt"></li>
+                <li><input id="txtMobile" type="tel" maxlength="11" placeholder="请输入手机号" required="required" class="field_ipt" v-model="phoneNumber"></li>
+                <li><input type="password" maxlength="20" placeholder="请设置6-20位密码,包含字母、数字或符号" id="regPwd" required="required" class="field_ipt" v-model="password"></li>
                 <li><input required="required" type="text" maxlength="10" id="regCaptcha" placeholder="请输入图形验证码" class="field_ipt" style="width: 70%;">
                   <div class="verifycode_img">
                     <img src="http://account.lifevc.com/Account/NewVerifyCode?t=1499764256730"
@@ -20,12 +20,12 @@
                   </div>
                 </li>
                 <li>
-                  <input type="text" placeholder="请输入手机验证码" maxlength="10" id="regSmsCaptcha" required="required" class="field_ipt">
-                  <a class="fidld_skip">获取验证码</a>
+                  <input type="text" placeholder="请输入手机验证码" maxlength="10" id="regSmsCaptcha" required="required" class="field_ipt" v-model="smsNum">
+                  <a class="fidld_skip" @click="getSms">获取验证码</a>
                 </li>
               </ul>
-              <p>遇到问题？请
-                <a href="tel:400-609-2288">联系客服</a></p> <input type="button" value="注册"  class="btn_login space m-top">
+              <p>遇到问题？请<a href="tel:400-609-2288">联系客服</a></p>
+              <input type="button" value="注册"  class="btn_login space m-top" @click="toRegister">
               <input type="button" value="登录" class="btn_regisiter space m-top" @click="goLogin">
             </form>
           </div>
@@ -36,11 +36,14 @@
 </template>
 
 <script>
-
+  import axios from 'axios'
   export default {
     data(){
       return {
-        isShow:true
+        isShow:true,
+        phoneNumber:'',
+        password:'',
+        smsNum:''
       }
     },
     created(){
@@ -56,6 +59,26 @@
       },
       goLogin(){
         this.$router.push({path:'/login'})
+      },
+      getSms(){
+        let url = `/sendcode?phone=${this.phoneNumber}`
+        axios.get(url)
+          .then(res=>{
+            //..
+          })
+      },
+      toRegister(){
+        axios.post('/register',{
+          phone:this.phoneNumber,
+          password:this.password,
+          code:this.smsNum
+        })
+          .then(res=>{
+            console.log(res.data.code)
+          })
+          .catch(err=>{
+            console.log(err);
+          })
       }
     },
   }

@@ -15,9 +15,12 @@
                    ref="loadmore">
         <div class="uscenter-cont">
           <div class="acct-user-wrap"><!---->
-            <div class="acct-nolog"><span class="state">您还未登录</span>
+            <div style="font-size: 4rem;line-height: 9rem;text-align: center"
+                 v-if="username" >{{username}}</div>
+            <div class="acct-nolog" v-else>
+              <span class="state">您还未登录</span>
               <div class="btn-entry">
-                <router-link to="/login" class="font-large">登录</router-link>
+                <router-link to="/login" class="font-large" :updateUsername="updateUsername">登录</router-link>
                 <span class="split"></span>
                 <router-link to="/register" class="font-large">注册</router-link>
               </div>
@@ -86,10 +89,15 @@
 
 <script>
   import {Loadmore} from 'mint-ui'
+//  import storageUtil from '../../../util/localStorageUtils'
   export default {
+    props:{
+      username:String,
+      updateUsername:Function
+    },
     data(){
       return {
-        allLoaded:false
+        allLoaded:false,
       }
     },
     methods: {
@@ -103,7 +111,8 @@
           this.allLoaded = true;// 若数据已全部获取完毕
           this.$refs.loadmore.onBottomLoaded();
         },1000)
-      }
+      },
+
     },
     components:{
       'mt-loadmore':Loadmore
