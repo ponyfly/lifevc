@@ -20,21 +20,11 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
 
+var router = require('../noderouter/router')
+
 var app = express()
 
-const data = require('../src/mock/life.json')
-const router = express.Router();
-
-router.get('/life/webinfos',(req,res,next)=>{
-  res.set("Access-Control-Allow-Origin", "*")
-  res.json(data.lifeInfo)
-})
-router.get('/life/goods',(req,res,next)=>{
-  res.set("Access-Control-Allow-Origin", "*")
-  res.json(data.goods)
-})
-
-app.use(router)
+app.use('/',router)
 
 var compiler = webpack(webpackConfig)
 

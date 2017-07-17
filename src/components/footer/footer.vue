@@ -1,7 +1,6 @@
 <template>
   <footer id="bottombar" class="footer">
-    <div>
-      <ul id="footermenuNav">
+    <ul id="footermenuNav">
         <li><router-link to="/home">
           <div class="ico homeico"></div>
           <span class="lispan">首页</span></router-link></li>
@@ -18,7 +17,6 @@
           <div class="ico accountcenterico"></div>
           <span>账户中心</span> <span></span></router-link></li>
       </ul>
-    </div>
   </footer>
 </template>
 

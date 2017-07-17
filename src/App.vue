@@ -80,6 +80,20 @@
           document.body.scrollTop = 0;
         },
         deep:true
+      },
+      "$route.path":{
+        handler(newVal){
+          if(
+            newVal.indexOf('channelsub')>0 ||
+            newVal.indexOf('login')>0 ||
+            newVal.indexOf('register')>0 ||
+            newVal.indexOf('item')>0
+          ){
+            this.isShow=false
+          }else{
+            this.isShow = true
+          }
+        }
       }
     },
     updated(){
@@ -88,10 +102,8 @@
     methods:{
       _initStyle(){
         if(this.$route.path!='/login' && this.$route.path!='/register'){
-          this.isShow=true;
           this.width = 375/36;
         }else{
-          this.isShow=false;
           this.width = 375/7.5;
         }
         this.styleN.innerHTML = 'html{font-size: '+this.width +'px !important;}';

@@ -10,22 +10,26 @@ import channel from '../components/channel/channel.vue'
 import login from '../components/login/login.vue'
 import register from '../components/register/register.vue'
 import channelsub from '../components/channelsub/channelsub.vue'
+import waredetail from '../components/waredetail/waredetail.vue'
 
 Vue.use(VueRouter)
 
+const routes = [
+  {path:'/',redirect:'/home'},
+  {path: '/home', component: home},
+  {path: '/all', component: all},
+  {path: '/stroll', component: stroll},
+  {path: '/cart', component: cart},
+  {path: '/usercenter', component: usercenter},
+  {path: '/new', component: newproduct},
+  {path: '/channel/:id', component: channel},
+  {path: '/login', component: login},
+  {path: '/register', component: register},
+  {path: '/channelsub/:goodId/:productId', component: channelsub},
+  {path: '/item/:wareId', component: waredetail},
+]
+
 export default new VueRouter({
   linkActiveClass:'selected',
-  routes: [
-    {path:'/',redirect:'/home'},
-    {path: '/home', component: home},
-    {path: '/all', component: all},
-    {path: '/stroll', component: stroll},
-    {path: '/cart', component: cart},
-    {path: '/usercenter', component: usercenter},
-    {path: '/new', component: newproduct},
-    {path: '/channel/:id', component: channel},
-    {path: '/login', component: login},
-    {path: '/register', component: register},
-    {path: '/channelsub/:goodId/:productId', component: channelsub},
-  ]
+  routes
 })

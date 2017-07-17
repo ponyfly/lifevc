@@ -19,7 +19,7 @@
                 <dl class="life-goodsMark">{{good.name}}</dl> <!----></div>
               <ul class="life-goodsUl clearFix onlyStyle">
                 <li style="height: 138px;" v-for="product in good.products">
-                  <router-link :to="`/channelsub/${good.id}/${2877}`">
+                  <router-link :to="`/channelsub/${good.id}/${product.id}`">
                     <img :src="product.image">
                     <dl>{{product.name}}</dl>
                   </router-link>

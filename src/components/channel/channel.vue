@@ -6,7 +6,7 @@
       <div class="lf-loadmore">
         <ul id="blockcartegory" class="life-goodsUl clearFix life-child-thank">
           <li v-for="product in currentGood.products">
-            <router-link :to="`/channelsub/${$route.params.id}/3351`">
+            <router-link :to="`/channelsub/${currentGood.id}/${product.id}`">
               <img :src="product.image">
               <dl>{{product.name}}</dl>
             </router-link>
@@ -32,7 +32,7 @@
               </div>
               <div class="item-price">
                 <div class="price-cont">
-                  <span class="act-tag">限时体验价</span>
+                  <span class="act-tag" v-show="ware.oldPrice">限时体验价</span>
                   <span>￥</span> <span>{{ware.price}}</span>&nbsp;
                   <span class="original-price" v-show="ware.oldPrice">￥{{ware.oldPrice}}</span>
                   <span class="promo-lable" v-show="ware.newWare">新</span>
@@ -275,6 +275,10 @@
     float: left;
     line-height: 1.8rem;
     margin-top: .2rem;
+  }
+  .shelf-item .item-panel .price-cont .original-price{
+    color: #ccc
+    text-decoration line-through
   }
   .shelf-item .item-panel .act-tag {
     background-color: #fff000;

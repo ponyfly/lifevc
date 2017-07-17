@@ -4,11 +4,11 @@
     <div class="wrap-shelf" style="margin-bottom: 80px" v-if="newWares">
       <div class="subcat-title">最近一周新品</div>
       <div class="shelf-item" v-for="ware in newWares">
-        <a class="item-pic-bx">
+        <router-link :to="`/item/${ware.id}`" class="item-pic-bx">
           <img class="item-pic" :src="ware.image">
           <!---->
           <div class="item-status-empty" v-show="false">热卖脱销</div>
-        </a>
+        </router-link>
         <div class="item-panel">
           <div class="title clearFix">{{ware.name}}</div>
           <div class="item-price">

@@ -17,10 +17,10 @@
         <div class="clearFix" v-if="randomWares">
           <div class="stroll-all-item">
             <div class="stroll-item">
-              <div class="stroll-type-item" v-for="ware in wares">
+              <div class="stroll-type-item" v-for="ware in wares" @click="toWareRoute(ware.id)">
                 <div class="stroll-item-layer">
                   <img class="stroll-item-img" :src="ware.image">
-                  <span class="tag-new">New</span>
+                  <span class="tag-new" v-show="ware.newWare">New</span>
                 </div>
                 <h3 class="stroll-item-title">
                   <a href="javascript:void(0);">{{ware.name}}</a>
@@ -70,6 +70,9 @@
           this.allLoaded = true;// 若数据已全部获取完毕
           this.$refs.loadmore.onBottomLoaded();
         },5000)
+      },
+      toWareRoute(wareId){
+        this.$router.push({path:`/item/${wareId}`})
       }
     },
     computed:{
